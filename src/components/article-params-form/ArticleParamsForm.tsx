@@ -1,6 +1,8 @@
 import { ArrowButton } from 'src/ui/arrow-button';
 import { Text } from 'src/ui/text';
 import { Button } from 'src/ui/button';
+import { RadioGroup } from 'src/ui/radio-group';
+import { Separator } from 'src/ui/separator';
 
 import {
 	ArticleStateType,
@@ -13,13 +15,10 @@ import {
 } from 'src/constants/articleProps';
 
 import styles from './ArticleParamsForm.module.scss';
+import clsx from 'clsx';
 import { Select } from 'src/ui/select';
 import { FormEvent, useState, useRef } from 'react';
 import { useOutsideClickClose } from 'src/ui/select/hooks/useOutsideClickClose';
-
-import { RadioGroup } from 'src/ui/radio-group';
-import { Separator } from 'src/ui/separator';
-import clsx from 'clsx';
 
 type ArticleParamsProps = {
 	articleState: ArticleStateType;
@@ -50,9 +49,9 @@ export const ArticleParamsForm = ({
 	});
 
 	const formResetHandler = () => {
-		setFormState(() => ({
+		setFormState({
 			...defaultArticleState,
-		}));
+		});
 
 		setArticleState(defaultArticleState);
 	};
