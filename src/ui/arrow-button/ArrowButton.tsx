@@ -4,7 +4,7 @@ import styles from './ArrowButton.module.scss';
 import clsx from 'clsx';
 
 /** Функция для обработки открытия/закрытия формы */
-export type OnClick = () => void;
+export type OnClick = (state: boolean) => void;
 
 type ArrowButtonProps = {
 	isOpen: boolean;
@@ -12,6 +12,9 @@ type ArrowButtonProps = {
 };
 
 export const ArrowButton = ({ isOpen, onClick }: ArrowButtonProps) => {
+	const onClickHandler = () => {
+		onClick(!isOpen);
+	};
 	return (
 		/* Не забываем указаывать role и aria-label атрибуты для интерактивных элементов */
 		<div
@@ -19,7 +22,10 @@ export const ArrowButton = ({ isOpen, onClick }: ArrowButtonProps) => {
 			aria-label='Открыть/Закрыть форму параметров статьи'
 			tabIndex={0}
 			className={clsx(styles.container, { [styles.container_open]: isOpen })}
-			onClick={onClick}>
+			onClick={(e: React.MouseEvent) => {
+				e.stopPropagation();
+				onClickHandler();
+			}}>
 			<img
 				src={arrow}
 				alt='иконка стрелочки'
